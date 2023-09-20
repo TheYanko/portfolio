@@ -2,6 +2,7 @@
 
 import sys
 import os
+import random
 
 from pynput import keyboard
 from pynput.keyboard import Key
@@ -62,6 +63,18 @@ class Game2048():
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0]]
+        row1, row2, column1, column2 = 0, 0, 0, 0
+        
+        #Generating two random spots coordination for beginning numbers
+        while row1 == row2 and column1 == column2:
+            row1 = random.randint(0, 3)
+            row2 = random.randint(0, 3)
+            column1 = random.randint(0, 3)
+            column2 = random.randint(0, 3)
+
+        #Placing two starting 2 on a board
+        self.playing_board[row1][column1] = 2
+        self.playing_board[row2][column2] = 2
 
 if __name__ == "__main__":
     game = Game2048()
