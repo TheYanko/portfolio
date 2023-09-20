@@ -13,12 +13,53 @@ class Game2048():
     def __init__(self):
         self.playing_board = []
 
+    def move_numbers_left(self):
+        """TODO: Write move_numbers_left documentation"""
+        numbers_added_flag = 0
+        for row in range(4):
+            numbers_added_flag = 0
+            for i in range(4):
+                if self.playing_board[row][i] == 0:
+                    continue
+                else:
+                    i2 = i
+                    while i2 > 0:
+                        if self.playing_board[row][i2 - 1] == 0:
+                            self.playing_board[row][i2 - 1] = self.playing_board[row][i2]
+                            self.playing_board[row][i2] = 0
+                            i2 = i2 - 1
+                        elif  self.playing_board[row][i2 - 1] == self.playing_board[row][i2] and numbers_added_flag == 0:
+                            self.playing_board[row][i2 - 1] = self.playing_board[row][i2 - 1] * 2
+                            self.playing_board[row][i2] = 0
+                            numbers_added_flag = 1
+                            i2 = i2 - 1
+                        elif  self.playing_board[row][i2 - 1] == self.playing_board[row][i2] and numbers_added_flag == 1:
+                            numbers_added_flag = 0
+                            break
+                        elif self.playing_board[row][i2] != self.playing_board[row][i2 - 1]:
+                            numbers_added_flag = 0
+                            break
+
+    def move_numbers_right(self):
+        """TODO: Write move_numbers_right documentation"""
+        pass
+
+    def move_numbers_up(self):
+        """TODO: Write move_numbers_up documentation"""
+        pass
+
+    def move_numbers_down(self):
+        """TODO: Write move_numbers_down documentation"""
+        pass
+
     def actions_on_key_release(self, key):
         """TODO: actions_on_key_release docstring"""
         match key:
             case Key.right:
                 self.display_playing_field()
             case Key.left:
+                self.move_numbers_left()
+
                 self.display_playing_field()
             case Key.up:
                 self.display_playing_field()
