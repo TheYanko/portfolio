@@ -1,6 +1,7 @@
 """2048 console game written in Python 3.10.12"""
 
 import sys
+import os
 
 from pynput import keyboard
 from pynput.keyboard import Key
@@ -15,23 +16,35 @@ class Game2048():
         """TODO: actions_on_key_release docstring"""
         match key:
             case Key.right:
-                print("Right arrow pressed.")
+                self.display_playing_field()
             case Key.left:
-                print("Left arrow pressed.")
+                self.display_playing_field()
             case Key.up:
-                print("Up arrow pressed.")
+                self.display_playing_field()
             case Key.down:
-                print("Down arrow pressed.")
+                self.display_playing_field()
             case Key.esc:
-                print("Thanks for playing")
+                self.display_playing_field()
                 sys.exit()
             case Key.enter:
                 print("Game started/restarted")
                 self.create_playing_field()
+                self.display_playing_field()
 
+    def display_playing_field(self):
+        """TODO: Write display_playing_field() docstring"""
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        for row in self.playing_board:
+            print(row, end='\n')
+        print()
+        print("Use arrows to play.")
+        print("Press 'ESC' to quit.")
+        print("Press 'ENTER' to restart the game.")
 
     def start_game_loop(self):
         """TODO: Write start_game() docstring"""
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("Welcome to 2048 console game.")
         print("Made by Maciej Jankowski")
         print("Press 'Enter' to start/restart the game!")
@@ -45,11 +58,10 @@ class Game2048():
 
     def create_playing_field(self):
         """TODO: Write create_playing_field() docstring"""
-        playing_board = [[0, 0, 0, 0],
+        self.playing_board = [[0, 0, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0],
                         [0, 0, 0, 0]]
-        return playing_board
 
 if __name__ == "__main__":
     game = Game2048()
